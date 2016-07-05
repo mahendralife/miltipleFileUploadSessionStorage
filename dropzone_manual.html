@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ngDropzone">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dropzon via Angular</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="dropzone/dropzone.css" />
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+    #fileUpload { border: 1px gray solid;  min-height: 100px;}
+    </style>
+  </head>
+  <body>
+   <span ng-include="header"></span>
+    <div class="container" ng-controller="dropzone">
+      <div class="border">
+
+
+      <h3 class="text-center">Multiple File upload System</h3>
+       <div class="center-block text-center">
+
+           <a href="index.html">Using Standalon AngularJs</a> |
+           <a href="dropzone.html">Dopzone </a>
+
+      </div>
+      <br>
+       Drop your files here
+    <form id="fileUpload">
+      <span class="clickable"></span>
+      
+    </form>
+    </div>
+    <br>
+      <button class="btn center-block btn-center btn-primary" id="upload" type="button" >Upload</button>
+    </div>
+  </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="dropzone/dropzone.js"></script>
+    <script src="dropzone/app.js"></script>
+    <script type="text/javascript">
+    //fileUpload
+    var options={
+      url: "server/uploaddropzone.php",
+        paramName: "file", // The name that will be used to transfer the file
+        maxFilesize: 1, // MB
+        maxFiles: 5,
+            parallelUploads: 5,
+            addRemoveLinks: true,
+            dictMaxFilesExceeded: "You can only upload upto 5 images",
+            dictRemoveFile: " ",
+            dictCancelUploadConfirmation: "Are you sure to cancel upload?",
+            acceptedFiles:"image/*,application/pdf",
+            autoProcessQueue:false,
+            init: function() 
+            {
+              this.on("addedfile", function(file) { 
+
+                console.log("file add in container");
+               });
+              this.on("removedfile", function(file){
+                console.log("file remove form container")
+              });
+              this.on("totaluploadprogress", function(e){
+                console.log(e);
+              });
+              this.on("queuecomplete", function(e){
+                console.log("queuecomplete"+ e);
+
+              })
+            },
+
+
+         }
+        var files = new Dropzone("#fileUpload",options);
+          
+          files.on("complete", function(file) {
+            console.log("file uploaded");
+            
+        
+          });
+           files.on("removeFile", function(file) {
+            console.log("file uploaded");
+            files.removeFile(file);
+        
+          });
+         
+      var button=document.getElementById("upload");
+      button.addEventListener("click", uploadFiles);
+      function uploadFiles(){
+        files.processQueue();
+      }
+
+    </script>
+  </body>
+</html>

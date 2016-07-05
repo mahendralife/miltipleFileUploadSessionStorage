@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ngDropzone">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Dropzon via Angular</title>
+
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="dropzone/dropzone.css" />
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.2/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+   <span ng-include="header"></span>
+   
+    <div class="container" ng-controller="dropzone">
+      <div class="border">
+
+
+      <h3 class="text-center">Multiple File upload System</h3>
+       <div class="center-block text-center">
+
+           <a href="index.html">Using Standalon AngularJs</a> |
+           <a href="dropzone_manual.html"> Dopzone  Manual </a>
+
+      </div>
+      <br>
+    <form action="server/uploaddropzone.php" class="dropzone">
+      <div class="fallback">
+        <input name="file" type="file" multiple />
+
+      </div>
+      <div class="clearfix">
+
+      </div>
+
+    </form>
+    
+    </div>
+  </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.5.6/angular.min.js"></script>
+    <script src="dropzone/dropzone.js"></script>
+    <script src="dropzone/app.js"></script>
+  </body>
+</html>
